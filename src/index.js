@@ -2,6 +2,11 @@ import { Client, IntentsBitField } from "discord.js";
 import dotenv from "dotenv";
 dotenv.config();
 
+
+import { angryEmojis, confusedEmojis, sadEmojis, happyEmojis } from "../utils/faces.js";
+import { angryResponses, confusedResponses, sadResponses, advice } from "../utils/responses.js";
+import { greetingFace, botReply, botReplyAdvice, handleReply } from "../utils/helpers.js";
+
 /**
  * @description This array represents the categories of Events we want available to our Bot.
  * @argument: `IntentsBitField.Flags.Guilds`
@@ -49,18 +54,38 @@ const emojiRegex = /:[a-zA-Z_]+:/g;
 
 client.on("ready", (bot) => {
   console.log(`✅ ${bot.options.rest.authPrefix} ${bot.user.tag} is online! Listening to channels: ${bot.channels}`);
+  // message.channel.send("Hi, please send $angry, $sad, or $confused to interact with me ( ͡° ͜ʖ ͡°)")
 });
 
 client.on("messageCreate", (message) => {
   /* this validation disallows bots from responding to each other/themselves, remove at your own risk 💀 */
   if (message.author.bot) return;
+  let executed = false;
 
-  // console.log(message);
+  /* this validation will delete a targetted user's message and replace it with a given message */
+  // if (message.author.username = "target_username") {
+  //   message.delete();
+  //   message.channel.send(`${message.author.username} is a fart-sniffer (☞ﾟヮﾟ)☞`);
+  // }
 
-  if (message.author.username = "colin_williams_dev") {
-    console.log("username vaildation passed");
-    message.delete();
-    message.channel.send(`${message.author.username} is a fart-sniffer (☞ﾟヮﾟ)☞`);
+  /* custom "$" prepended commands " */
+  // if (message.content.startsWith("$angry")) {
+  //   message.channel.send(greetingFace(angryEmojis));
+  //   message.reply(botReply(message.author.username, angryResponses));
+  //   message.reply(botReplyAdvice(advice));
+  // }
+  if (message.content.startsWith("$angry") && !executed) {
+    console.log("how many times?");
+    handleReply(message, "$angry");
+    executed = true;
+  }
+  if (message.content.startsWith("$confused") && !executed) {
+    handleReply(message, "$confused");
+    executed = true;
+  }
+  if (message.content.startsWith("$sad") && !executed) {
+    handleReply(message, "$sad");
+    executed = true;
   }
 
   /* message sent in server from any user: */
