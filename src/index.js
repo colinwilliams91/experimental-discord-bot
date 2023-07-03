@@ -30,6 +30,14 @@ const client = new Client({
 
 /**
  *  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ * ^^^^^^^^^^  ^^^ REGEX ^^^  ^^^^^^^^^^
+ *  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ */
+
+const emojiRegex = /:[a-zA-Z_]+:/g;
+
+/**
+ *  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  * ^^^^^^^^^^ EVENT LISTENERS ^^^^^^^^^^
  *  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  */
@@ -44,7 +52,21 @@ client.on("ready", (bot) => {
 });
 
 client.on("messageCreate", (message) => {
-  console.log(message.content);
+  /* this validation disallows bots from responding to each other/themselves, remove at your own risk 💀 */
+  if (message.author.bot) return;
+
+  // console.log(message);
+
+  if (message.author.username = "colin_williams_dev") {
+    console.log("username vaildation passed");
+    message.delete();
+    message.channel.send(`${message.author.username} is a fart-sniffer (☞ﾟヮﾟ)☞`);
+  }
+
+  /* message sent in server from any user: */
+  console.log(`Discord message: "${message.content}" from User: ${message.author.username} at ${message.createdAt}`);
+
+  /* bot will react to any message sent with this emoji */
   message.react('🤓');
 });
 
