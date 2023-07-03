@@ -19,7 +19,7 @@ export const sadResponses = [
   "cheer up, you only have 746 more job apps to churn out before you're hired",
   "negativity is why you aren't being hired",
   "you need to be loving Life and loving God, quit moping around",
-  `you applied to 49 jobs yesterday? Well, today your goal is ${Math.floor(Math.random() * 666 + 1)}`,
+  `you applied to ${Math.floor(Math.random() * 50 + 1)} jobs yesterday? Well, today your goal is ${Math.floor(Math.random() * 666 + 1)}`,
   "cheer up, I always start my day with 6 hours of concentrated breathing, then I climb onto the Buddhist Stupa I made from scratch from several Amazonian Pepal trees I harvested and Praise the Cosmos, THAT is how you will get a JOB"
 ];
 
